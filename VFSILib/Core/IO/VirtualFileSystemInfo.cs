@@ -10,11 +10,13 @@ public class VirtualFileSystemInfo : FileSystemInfo
 {
     private bool active;
 
-    public VirtualFileSystemInfo(string path, bool preCheck = true) : this(new FileInfo(path), preCheck)
+    public VirtualFileSystemInfo(string path, bool preCheck = true) : this(
+        string.IsNullOrWhiteSpace(path) ? null : new FileInfo(path), preCheck)
     {
     }
 
-    public VirtualFileSystemInfo(FileSystemInfo fi, bool preCheck = true) : this(fi.FullName, 0, 0, null, preCheck)
+    public VirtualFileSystemInfo(FileSystemInfo fi, bool preCheck = true) : this(
+        fi == null ? string.Empty : fi.FullName, 0, 0, null, preCheck)
     {
     }
 
